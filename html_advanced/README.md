@@ -7,5 +7,6 @@ i will focus on the HTML structure only - no CSS, no style - just pure HTML sema
       5. Membership
       6.FAQ
       7. Footer
+      ![](images/Beritha.jpg)
       
     
