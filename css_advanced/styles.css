@@ -88,7 +88,34 @@ header {
     align-self: center;
     margin: 2rem;
     padding: 1rem;
+    font-size: 10px;
 }
+}
+
+.element {
+    padding: 1%;
+    display: flex;
+    position: relative;
+    margin-top: 20px;
+}
+
+.element>h2 {
+    align-self: center;
+    padding: 2rem;
+    font-weight: 300;
+    line-height: 40px;
+}
+
+.grid{position: absolute;
+    font-size: 22px;
+    left: 41%;
+    right: 39%;
+    color: #fff;   
+}
+.dcolor{
+    color: #c271ff;
+}
+
 
 
 
