@@ -1,0 +1,100 @@
+
+header {
+    display: flex;
+    flex-direction: row;
+    flex: auto;
+    background-image: url(images/Beritha.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 2% 5% 2% 5%;
+    filter: grayscale(100%);
+    position: absolute;
+    left: -0.025%;
+    right: -0.025%;
+    top: 0%;
+    justify-content: space-between;
+    bottom: -26.48%;
+    height: 100vh;
+    
+}
+.mainbar {
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 15px;
+    color: #FFFFFF;
+    padding-right: 53px;
+    text-transform: uppercase;
+    text-decoration: none;
+    text-decoration-color: white;
+    
+}
+.mainbar a
+{
+    color:#FFFFFF;
+    font-weight: 900;
+
+}
+
+.head a {
+    color: #FFFFFF;
+    font-weight: 900;
+}
+.head {
+    position: relative;
+    right: 36px;
+}
+
+.school {
+    display: flex;
+    flex-direction: column;
+    padding-top: 5rem;
+}
+
+.school>h1 {
+    height: 151px;
+    font-weight: 700;
+    font-size: 120px;
+    line-height: 151px;
+    text-align: center;
+    color: #ffffff;
+    z-index: 20;
+}
+
+.school>p {
+    height: 20px;
+    position: relative;
+    margin-top: -5%;
+    text-align: center;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 20px;
+    color: #ffffff;
+    display: flex;
+    justify-content: space-around;
+    margin-left: 38%;
+    margin-right: 38%;
+    word-spacing: 5px;
+}
+
+.school>button {
+    background: #c271ff;
+    border-radius: 25px;
+    border: none;
+    padding: 0.7rem;
+    color: white;
+    font-weight: 500;
+    box-shadow: 0px 1px 20px rgba(0, 0, 0, 0.5);
+    position: relative;
+    align-self: center;
+    margin: 2rem;
+    padding: 1rem;
+}
+
+
+
+
+
+
+
+
+
