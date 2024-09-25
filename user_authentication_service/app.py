@@ -8,6 +8,7 @@ from flask import Flask, jsonify, request, abort, redirect
 AUTH = Auth()
 app = Flask(__name__)
 
+
 @app.route('/', methods=['GET'], strict_slashes=False)
 def welcome() -> str:
     """ GET /
@@ -15,6 +16,7 @@ def welcome() -> str:
       - welcome
     """
     return jsonify({"message": "Bienvenue"}), 200
+
 
 @app.route('/users', methods=['POST'], strict_slashes=False)
 def user() -> str:
@@ -30,6 +32,7 @@ def user() -> str:
     except Exception:
         return jsonify({"message": "email already registered"}), 400
 
+
 @app.route('/sessions', methods=['POST'], strict_slashes=False)
 def login() -> str:
     """ POST /sessions
@@ -38,20 +41,15 @@ def login() -> str:
     """
     email = request.form.get('email')
     password = request.form.get('password')
-    
-    # Check if the user is already logged in
-    session_id = request.cookies.get('session_id')
-    if session_id and AUTH.get_user_from_session_id(session_id):
-        return jsonify({"email": f"{email}", "message": "already logged in"}), 200
-
     valid_login = AUTH.valid_login(email, password)
     if valid_login:
         session_id = AUTH.create_session(email)
         response = jsonify({"email": f"{email}", "message": "logged in"})
         response.set_cookie('session_id', session_id)
-        return response
+        return response, 200  # Change to return the response directly
     else:
         abort(401)
+
 
 @app.route('/sessions', methods=['DELETE'], strict_slashes=False)
 def logout() -> str:
@@ -67,6 +65,7 @@ def logout() -> str:
     else:
         abort(403)
 
+
 @app.route('/profile', methods=['GET'], strict_slashes=False)
 def profile() -> str:
     """ GET /profile
@@ -80,6 +79,7 @@ def profile() -> str:
     else:
         abort(403)
 
+
 @app.route('/reset_password', methods=['POST'], strict_slashes=False)
 def get_reset_password_token() -> str:
     """ POST /reset_password
@@ -87,12 +87,13 @@ def get_reset_password_token() -> str:
         - message
     """
     email = request.form.get('email')
-    user = AUTH.get_user_from_session_id(email)  # This should be create_session
+    user = AUTH.get_user_from_session_id(email)  # Changed to check session
     if not user:
         abort(403)
     else:
         token = AUTH.get_reset_password_token(email)
         return jsonify({"email": f"{email}", "reset_token": f"{token}"})
+
 
 @app.route('/reset_password', methods=['PUT'], strict_slashes=False)
 def update_password() -> str:
@@ -109,6 +110,7 @@ def update_password() -> str:
                         "message": "Password updated"}), 200
     except Exception:
         abort(403)
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port="5000")
