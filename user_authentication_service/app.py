@@ -46,7 +46,7 @@ def login() -> str:
         session_id = AUTH.create_session(email)
         response = jsonify({"email": f"{email}", "message": "logged in"})
         response.set_cookie('session_id', session_id)
-        return response, 200
+        return response
     else:
         abort(401)
 
@@ -57,19 +57,12 @@ def logout() -> str:
       Return:
         - message
     """
-    # Get the session_id from the cookies
     session_id = request.cookies.get('session_id')
-    
-    # Check if the session ID corresponds to a valid user session
     user = AUTH.get_user_from_session_id(session_id)
-    
     if user:
-        # If user exists, destroy the session
         AUTH.destroy_session(user.id)
-        # Redirect the user to the welcome page
         return redirect('/')
     else:
-        # If user does not exist, respond with a 403 Forbidden
         abort(403)
 
 
@@ -79,17 +72,11 @@ def profile() -> str:
       Return:
         - message
     """
-    # Get the session_id from the cookies
     session_id = request.cookies.get('session_id')
-    
-    # Check if the session ID corresponds to a valid user session
     user = AUTH.get_user_from_session_id(session_id)
-    
     if user:
-        # If user exists, respond with user's email
         return jsonify({"email": user.email}), 200
     else:
-        # If user does not exist, respond with a 403 Forbidden
         abort(403)
 
 
@@ -100,7 +87,7 @@ def get_reset_password_token() -> str:
         - message
     """
     email = request.form.get('email')
-    user = AUTH.get_user_from_session_id(email)  # Changed to check session
+    user = AUTH.create_session(email)
     if not user:
         abort(403)
     else:
